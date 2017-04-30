@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippinServer", "TrippinServer\TrippinServer.csproj", "{9842868C-EABD-49E1-AF5E-BBAB11FC920B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm", "Algorithm\Algorithm.csproj", "{21DBA8B2-2F43-4C2A-B3CF-8758E0B23F3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{34755D36-1332-41BA-B64F-8D3F985C73BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scripts", "Scripts\Scripts.csproj", "{4D0725D9-BB68-42B1-B7A0-CCA3CA31B116}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9842868C-EABD-49E1-AF5E-BBAB11FC920B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9842868C-EABD-49E1-AF5E-BBAB11FC920B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9842868C-EABD-49E1-AF5E-BBAB11FC920B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9842868C-EABD-49E1-AF5E-BBAB11FC920B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21DBA8B2-2F43-4C2A-B3CF-8758E0B23F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DBA8B2-2F43-4C2A-B3CF-8758E0B23F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DBA8B2-2F43-4C2A-B3CF-8758E0B23F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DBA8B2-2F43-4C2A-B3CF-8758E0B23F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34755D36-1332-41BA-B64F-8D3F985C73BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34755D36-1332-41BA-B64F-8D3F985C73BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34755D36-1332-41BA-B64F-8D3F985C73BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34755D36-1332-41BA-B64F-8D3F985C73BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D0725D9-BB68-42B1-B7A0-CCA3CA31B116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D0725D9-BB68-42B1-B7A0-CCA3CA31B116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D0725D9-BB68-42B1-B7A0-CCA3CA31B116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D0725D9-BB68-42B1-B7A0-CCA3CA31B116}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

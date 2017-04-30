@@ -1,0 +1,15 @@
+c:\Projects\TrippinServer\Common\bin\Debug\Common.dll
+c:\Projects\TrippinServer\Common\bin\Debug\Common.pdb
+c:\Projects\TrippinServer\Common\bin\Debug\MongoDB.Bson.dll
+c:\Projects\TrippinServer\Common\bin\Debug\MongoDB.Driver.Core.dll
+c:\Projects\TrippinServer\Common\bin\Debug\MongoDB.Driver.dll
+c:\Projects\TrippinServer\Common\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+c:\Projects\TrippinServer\Common\bin\Debug\MongoDB.Bson.xml
+c:\Projects\TrippinServer\Common\bin\Debug\MongoDB.Driver.xml
+c:\Projects\TrippinServer\Common\bin\Debug\MongoDB.Driver.Core.xml
+c:\Projects\TrippinServer\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+c:\Projects\TrippinServer\Common\obj\Debug\Common.dll
+c:\Projects\TrippinServer\Common\obj\Debug\Common.pdb
+c:\Projects\TrippinServer\Common\bin\Debug\Common.dll.config
+C:\Projects\TrippinServer\Common\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\TrippinServer\Common\bin\Debug\Newtonsoft.Json.xml

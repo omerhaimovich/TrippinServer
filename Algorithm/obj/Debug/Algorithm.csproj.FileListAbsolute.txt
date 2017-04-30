@@ -1,0 +1,17 @@
+c:\Projects\TrippinServer\Algorithm\bin\Debug\Algorithm.dll
+c:\Projects\TrippinServer\Algorithm\bin\Debug\Algorithm.pdb
+c:\Projects\TrippinServer\Algorithm\bin\Debug\MongoDB.Bson.dll
+c:\Projects\TrippinServer\Algorithm\bin\Debug\MongoDB.Driver.Core.dll
+c:\Projects\TrippinServer\Algorithm\bin\Debug\MongoDB.Driver.dll
+c:\Projects\TrippinServer\Algorithm\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+c:\Projects\TrippinServer\Algorithm\bin\Debug\MongoDB.Bson.xml
+c:\Projects\TrippinServer\Algorithm\bin\Debug\MongoDB.Driver.xml
+c:\Projects\TrippinServer\Algorithm\bin\Debug\MongoDB.Driver.Core.xml
+c:\Projects\TrippinServer\Algorithm\obj\Debug\Algorithm.csprojResolveAssemblyReference.cache
+c:\Projects\TrippinServer\Algorithm\obj\Debug\Algorithm.dll
+c:\Projects\TrippinServer\Algorithm\obj\Debug\Algorithm.pdb
+c:\Projects\TrippinServer\Algorithm\bin\Debug\Common.dll
+c:\Projects\TrippinServer\Algorithm\bin\Debug\Common.pdb
+c:\Projects\TrippinServer\Algorithm\bin\Debug\Common.dll.config
+C:\Projects\TrippinServer\Algorithm\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\TrippinServer\Algorithm\bin\Debug\Newtonsoft.Json.xml
