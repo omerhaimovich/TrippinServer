@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using Common.Interfaces;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Common.Models
 {
-    public class Trip
+    public class Trip : ICollectional
     {        
         [BsonElement("location")]
-        public String Location { get; set; }
+        public String Country { get; set; }
 
         [BsonElement("year")]
         public int Year { get; set; }
@@ -37,6 +38,9 @@ namespace Common.Models
         [BsonIgnore]
         public List<Attraction> AwaitingAttractions { get; set; }
 
-
+        public string GetCollectionName()
+        {
+            return "Trips";
+        }
     }
 }

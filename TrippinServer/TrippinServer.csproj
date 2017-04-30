@@ -103,6 +103,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthUserRequest.cs" />
+    <Compile Include="Models\ConnectUserRequest.cs" />
     <Compile Include="Models\CreateTripRequest.cs" />
     <Compile Include="Models\CreateUserRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

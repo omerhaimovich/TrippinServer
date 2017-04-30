@@ -60,10 +60,11 @@ namespace TrippinServer.Controllers
             return Ok(objUserExist);
         }
 
+        // TODO: Limay
         [HttpPost]
-        [Route("AuthenticateUser")]
+        [Route("CreateOrAuthenticateUser")]
         // http://host:port/Users/CreateOrAuthenticateUser
-        public IHttpActionResult CreateOrAuthenticateUser([FromBody] AuthUserRequest p_objUserAuthRequest)
+        public IHttpActionResult CreateOrAuthenticateUser([FromBody] ConnectUserRequest p_objUserAuthRequest)
         {
             // Check to see if user exist by email if not create new one.
             return Ok();
