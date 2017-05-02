@@ -102,3 +102,7 @@ C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\TrippinServer\bin\System.
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\TrippinServer\obj\Debug\TrippinServer.csprojResolveAssemblyReference.cache
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\TrippinServer\obj\Debug\TrippinServer.dll
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\TrippinServer\obj\Debug\TrippinServer.pdb
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\TrippinServer\bin\Algorithm.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\TrippinServer\bin\Algorithm.pdb
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\TrippinServer\bin\AprioriAlgorithm.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\TrippinServer\bin\AprioriAlgorithm.pdb

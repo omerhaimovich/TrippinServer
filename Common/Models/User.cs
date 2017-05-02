@@ -25,11 +25,17 @@ namespace Common.Models
         [BsonElement("trips")]
         public List<String> Trips { get; set; }
 
-        [BsonElement("wantedAttractions")]
-        public List<AttractionType> Attractions { get; set; }
+      
 
         [BsonElement("notificationsOn")]
         public bool NotificationsOn { get; set; }
+
+        [BsonIgnore]
+        public List<Trip> TripsObjects { get; set; }
+
+        [BsonIgnore]
+        public Trip ActiveTrip { get; set; }
+
 
         public string GetCollectionName()
         {

@@ -77,7 +77,7 @@ namespace Common
                         {
                             ID = id,
                             IsOpenNow = open,
-                            latitude = lat,
+                            Latitude = lat,
                             Longitude = lng,
                             Name = name,
                             Rating = (float)rating,

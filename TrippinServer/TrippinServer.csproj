@@ -121,6 +121,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Algorithm\BussinessLogic.csproj">
+      <Project>{21DBA8B2-2F43-4C2A-B3CF-8758E0B23F3F}</Project>
+      <Name>BussinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{34755D36-1332-41BA-B64F-8D3F985C73BD}</Project>
       <Name>Common</Name>

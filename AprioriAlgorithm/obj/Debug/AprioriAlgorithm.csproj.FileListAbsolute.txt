@@ -1,0 +1,20 @@
+C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.pdb
+C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.pdb
+D:\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll
+D:\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.pdb
+D:\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\ResolveAssemblyReference.cache
+D:\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.dll
+D:\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.pdb
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.pdb
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.csprojResolveAssemblyReference.cache
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.pdb

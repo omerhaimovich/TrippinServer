@@ -9,6 +9,7 @@ using System.Web.Http;
 using TrippinServer.Models;
 using MongoDB.Driver;
 using Common.Enums;
+using Algorithm.Users;
 
 namespace TrippinServer.Controllers
 {
@@ -31,8 +32,7 @@ namespace TrippinServer.Controllers
                 Email = p_objUserCreationRequest.Email,
                 Password = p_objUserCreationRequest.Password,
                 Trips = new List<string>(),
-                NotificationsOn = true,
-                Attractions = new List<AttractionType>(Enum.GetValues(typeof(AttractionType)).Cast<AttractionType>()),
+                NotificationsOn = true,                
                 Username = p_objUserCreationRequest.Name
             };
 
@@ -60,14 +60,14 @@ namespace TrippinServer.Controllers
             return Ok(objUserExist);
         }
 
-        // TODO: Limay
+        
         [HttpPost]
-        [Route("CreateOrAuthenticateUser")]
-        // http://host:port/Users/CreateOrAuthenticateUser
-        public IHttpActionResult CreateOrAuthenticateUser([FromBody] ConnectUserRequest p_objUserAuthRequest)
-        {
+        [Route("ConnectUser")]
+        // http://host:port/Users/ConnectUser
+        public IHttpActionResult ConnectUser([FromBody] ConnectUserRequest p_objUserAuthRequest)
+        {            
             // Check to see if user exist by email if not create new one.
-            return Ok();
+            return Ok(UsersBL.GetUser(p_objUserAuthRequest.Email, p_objUserAuthRequest.Lat, p_objUserAuthRequest.Lng));
         }
 
     }
