@@ -36,9 +36,6 @@ namespace Algorithm.Trips
 
             if (objUser == null)
                 throw new Exception();
-            
-            MongoAccess.Access<User>().FindOneAndUpdate(objCurrUser => objCurrUser.Email == p_strEmail, 
-                                      new MongoDB.Driver.UpdateDefinitionBuilder<User>().AddToSet(x => x.Trips, objTrip.Id.ToString()));
 
             return objTrip;
         }

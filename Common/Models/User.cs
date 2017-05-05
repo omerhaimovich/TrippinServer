@@ -9,6 +9,7 @@ using Common.Enums;
 
 namespace Common.Models
 {
+    [BsonIgnoreExtraElements]
     public class User : ICollectional
     {
                 
@@ -21,12 +22,7 @@ namespace Common.Models
 
         [BsonElement("password")]
         public string Password { get; set; }
-
-        [BsonElement("trips")]
-        public List<String> Trips { get; set; }
-
-      
-
+       
         [BsonElement("notificationsOn")]
         public bool NotificationsOn { get; set; }
 

@@ -23,10 +23,9 @@ namespace Algorithm.Users
             
             if(objCurrUser == null)
             {
-                User objNewUSer = new Common.Models.User()
+                objCurrUser = new Common.Models.User()
                 {
-                    Email = strEmail,
-                    Trips = new List<string>(),
+                    Email = strEmail,                    
                     NotificationsOn = true,                    
                     ActiveTrip = null,
                     TripsObjects = new List<Trip>(),
@@ -36,7 +35,7 @@ namespace Algorithm.Users
             }
             else
             {
-                objCurrUser.TripsObjects = MongoAccess.Access<Trip>().Find(objTrip => objCurrUser.Trips.Contains(objTrip.Id.ToString())).ToList();
+                objCurrUser.TripsObjects = MongoAccess.Access<Trip>().Find(objTrip => objTrip.UserEmail == objCurrUser.Email).ToList();
                 objCurrUser.ActiveTrip = objCurrUser.TripsObjects.Where(objTrip => objTrip.Country == GMapsUtilities.GetCountryOfPoint(lat, lng))
                                                                  .OrderByDescending(objTrip => objTrip.CreationDate).FirstOrDefault();
             }

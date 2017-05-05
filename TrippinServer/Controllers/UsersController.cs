@@ -13,6 +13,7 @@ using Algorithm.Users;
 
 namespace TrippinServer.Controllers
 {
+    [RoutePrefix("api/users")]
     public class UsersController : ApiController
     {
         [HttpPost]
@@ -30,8 +31,7 @@ namespace TrippinServer.Controllers
             User objNewUSer = new Common.Models.User()
             {
                 Email = p_objUserCreationRequest.Email,
-                Password = p_objUserCreationRequest.Password,
-                Trips = new List<string>(),
+                Password = p_objUserCreationRequest.Password,                
                 NotificationsOn = true,                
                 Username = p_objUserCreationRequest.Name
             };

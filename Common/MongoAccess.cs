@@ -39,7 +39,8 @@ namespace Common
             MongoUrl uri = new MongoUrl(ConfigurationSettings.AppSettings["MongoPath"]);
 
             MongoClient mongoClient = new MongoClient(uri);
-            m_objDatabase = mongoClient.GetDatabase("Trippin");            
+            m_objDatabase = mongoClient.GetDatabase("Trippin");
+            m_dicCollections = new Dictionary<string, object>();
         }
 
     }
