@@ -3,7 +3,6 @@ C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\Scripts
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\Scripts.pdb
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\Common.dll
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\MongoDB.Driver.dll
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\MongoDB.Bson.dll
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\MongoDB.Driver.Core.dll
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll

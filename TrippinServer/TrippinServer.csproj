@@ -97,15 +97,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AttractionsController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AuthUserRequest.cs" />
-    <Compile Include="Models\ConnectUserRequest.cs" />
-    <Compile Include="Models\CreateTripRequest.cs" />
-    <Compile Include="Models\CreateUserRequest.cs" />
+    <Compile Include="Models\Attractions\AttractionChosenRequest.cs" />
+    <Compile Include="Models\Attractions\AttractionRatedRequest.cs" />
+    <Compile Include="Models\Trips\UpdateTripRequest.cs" />
+    <Compile Include="Models\Users\AuthUserRequest.cs" />
+    <Compile Include="Models\Users\ConnectUserRequest.cs" />
+    <Compile Include="Models\Trips\CreateTripRequest.cs" />
+    <Compile Include="Models\Users\CreateUserRequest.cs" />
+    <Compile Include="Models\Users\UpdateUserRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

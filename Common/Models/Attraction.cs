@@ -14,8 +14,6 @@ namespace Common.Models
 
         public string PhotoUrl { get; set; }
 
-        public string PhotoReference { get; set; }
-
         public float Rating { get; set; }
 
         public string GetCollectionName()

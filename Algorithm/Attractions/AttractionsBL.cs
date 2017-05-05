@@ -8,25 +8,26 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using AprioriAlgorithm;
+using Common.Enums;
 
 namespace Algorithm.Attractions
 {
     public class AttractionsBL
     {
-        public static List<Attraction> GetNewAttractions(string p_strTripId, double p_dLat, double p_dLng, Common.Enums.AttractionType p_eAttractionType)
+        public static List<Attraction> GetNewAttractions(string p_strTripId, double p_dLat, double p_dLng)
         {
             Trip objCurrUserTrip = MongoAccess.Access<Trip>().FindSync(objTrip => objTrip.Id == new ObjectId(p_strTripId)).FirstOrDefault();
-
+            
             if(objCurrUserTrip != null)
             {
-                var lstAttractions = GMapsUtilities.GetAttractionsAroundPoint(p_dLng, p_dLat, 10000, p_eAttractionType);
+                var lstAttractions = GMapsUtilities.GetAttractionsAroundPoint(p_dLat, p_dLng, objCurrUserTrip.WantedAttractionsTypes);
                 var dicAttractionsHash = lstAttractions.ToDictionary(x => x.ID);
                 var AttractionToCharacterHash = new Dictionary<string, string>();
                 var CharacterToAttractionHash = new Dictionary<string, string>();
 
                 List<String> generatedcharacters = GenerateCharacters();
 
-                var AdditionalTrips = MongoAccess.Access<Trip>().FindSync(objTrip => objTrip.Country == objCurrUserTrip.Country).ToList();
+                var AdditionalTrips = MongoAccess.Access<Trip>().FindSync(objTrip => objTrip.Country == objCurrUserTrip.Country && objTrip.Year == DateTime.Now.Year).ToList();
 
                 List<String> lstItems = new List<string>();
                 List<String> lstTransactions = new List<string>();
@@ -79,7 +80,7 @@ namespace Algorithm.Attractions
                 {
                     return lstAttractions.Where(objAttraction => objAttraction.IsOpenNow && !objCurrUserTrip.UnratedAttractionsIds.Contains(objAttraction.ID) &&
                                                                                 !objCurrUserTrip.GoodAttractionsIds.Contains(objAttraction.ID) &&
-                                                                                !objCurrUserTrip.BadAttractionsIds.Contains(objAttraction.ID)).OrderByDescending(x => x.Rating).Take(5).ToList();
+                                                                                !objCurrUserTrip.BadAttractionsIds.Contains(objAttraction.ID)).OrderByDescending(x => x.Rating).Take(10).ToList();
                 }
                 else
                 {
@@ -113,7 +114,15 @@ namespace Algorithm.Attractions
                         }
                     }
 
-                    return lstProposedAttractions;
+                    if (lstProposedAttractions.Count > 5)
+                    {
+                        return lstProposedAttractions;
+                    }
+                    else
+                    {
+                        lstProposedAttractions.AddRange(lstAttractions);
+                        return lstProposedAttractions.Take(10).ToList();
+                    }
                 }
             }
 
@@ -149,8 +158,13 @@ namespace Algorithm.Attractions
 
         public static void AttractionChosen(string p_strTripId, string p_strAttractionId)
         {
-            MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId), 
-                new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.UnratedAttractionsIds, p_strAttractionId));
+            Trip objCurrTrip = MongoAccess.Access<Trip>().FindSync(x => x.Id == new ObjectId(p_strTripId)).FirstOrDefault();
+
+            if (objCurrTrip != null && !objCurrTrip.UnratedAttractionsIds.Contains(p_strAttractionId))
+            {
+                MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
+                    new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.UnratedAttractionsIds, p_strAttractionId));
+            }
 
         }
 
@@ -159,17 +173,27 @@ namespace Algorithm.Attractions
             MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
                 new UpdateDefinitionBuilder<Trip>().Pull(x => x.UnratedAttractionsIds, p_strAttractionId));
 
-            if(goodAttraction)
-            {
-                MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
-                new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.GoodAttractionsIds, p_strAttractionId));
-            }
-            else
-            {
-                MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
-                new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.BadAttractionsIds, p_strAttractionId));
-            }
+            Trip objCurrTrip = MongoAccess.Access<Trip>().FindSync(x => x.Id == new ObjectId(p_strTripId)).FirstOrDefault();
 
+            if (objCurrTrip != null)
+            {
+                if (goodAttraction)
+                {
+                    if (!objCurrTrip.GoodAttractionsIds.Contains(p_strAttractionId))
+                    {
+                        MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
+                        new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.GoodAttractionsIds, p_strAttractionId));
+                    }
+                }
+                else
+                {
+                    if (!objCurrTrip.BadAttractionsIds.Contains(p_strAttractionId))
+                    {
+                        MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
+                        new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.BadAttractionsIds, p_strAttractionId));
+                    }
+                }
+            }
         }
 
         public static List<String> GenerateCharacters()
@@ -202,6 +226,11 @@ namespace Algorithm.Attractions
                 "X",
                 "Y",
                 "Z",
+                "@",
+                "!",
+                "$",
+                "#",
+                "%",
             };
         }
 

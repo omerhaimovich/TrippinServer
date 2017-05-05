@@ -8,12 +8,15 @@ namespace Common.Enums
 {
     public enum AttractionType
     {
-        Attraction,
-        Restaurant,
-        Hotel,
         Museum,
-        Architecture,
-        Nature,
+        Market,
+        ShoppingMall,
         Theater,
+        BarsPubs,
+        Restaurant,
+        History,
+        Children,
+        Nature,
+        Landmark
     }
 }

@@ -10,6 +10,7 @@ using TrippinServer.Models;
 using MongoDB.Driver;
 using Common.Enums;
 using Algorithm.Users;
+using TrippinServer.Models.Users;
 
 namespace TrippinServer.Controllers
 {
@@ -68,6 +69,16 @@ namespace TrippinServer.Controllers
         {            
             // Check to see if user exist by email if not create new one.
             return Ok(UsersBL.GetUser(p_objUserAuthRequest.Email, p_objUserAuthRequest.Lat, p_objUserAuthRequest.Lng));
+        }
+
+        [HttpPost]
+        [Route("UpdateUser")]
+        // http://host:port/Users/ConnectUser
+        public IHttpActionResult UpdateUser([FromBody] UpdateUserRequest p_objUserUpdateRequest)
+        {
+
+            UsersBL.UpdateUser(p_objUserUpdateRequest.Email.ToLower(), p_objUserUpdateRequest.NotificationsOn);                        
+            return Ok();
         }
 
     }

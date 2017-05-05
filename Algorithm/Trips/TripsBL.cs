@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using Common.Enums;
+using MongoDB.Bson;
 
 namespace Algorithm.Trips
 {
@@ -14,6 +15,11 @@ namespace Algorithm.Trips
     {
         public static Trip CreateTrip(string p_strEmail, double p_dLat, double p_dLng)
         {
+            User objUser = MongoAccess.Access<User>().FindSync(objCurrUser => objCurrUser.Email == p_strEmail).FirstOrDefault();
+
+            if (objUser == null)
+                throw new Exception();
+
             Trip objTrip = new Trip()
             {
                 UserEmail = p_strEmail,
@@ -29,14 +35,9 @@ namespace Algorithm.Trips
                 GoodAttractionsIds = new List<string>(),
                 UnratedAttractions = new List<Attraction>(),
             };
-
+            
             MongoAccess.Access<Trip>().InsertOne(objTrip);
-
-            User objUser = MongoAccess.Access<User>().FindSync(objCurrUser => objCurrUser.Email == p_strEmail).FirstOrDefault();
-
-            if (objUser == null)
-                throw new Exception();
-
+            
             return objTrip;
         }
 
@@ -46,22 +47,31 @@ namespace Algorithm.Trips
 
             string Country = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng);
 
-            objTrip.GoodAttractions = new List<Attraction>();
-            objTrip.BadAttractions = new List<Attraction>();
-            objTrip.UnratedAttractions = new List<Attraction>();
+            if (objTrip != null)
+            {
+                objTrip.GoodAttractions = new List<Attraction>();
+                objTrip.BadAttractions = new List<Attraction>();
+                objTrip.UnratedAttractions = new List<Attraction>();
+                
+                foreach (var attractionId in objTrip.GoodAttractionsIds)
+                    objTrip.GoodAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
 
-            foreach (var attractionId in objTrip.GoodAttractionsIds)            
-                objTrip.GoodAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
+                foreach (var attractionId in objTrip.BadAttractionsIds)
+                    objTrip.BadAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
 
-            foreach (var attractionId in objTrip.BadAttractionsIds)
-                objTrip.BadAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
+                foreach (var attractionId in objTrip.UnratedAttractionsIds)
+                    objTrip.UnratedAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
 
-            foreach (var attractionId in objTrip.UnratedAttractionsIds)
-                objTrip.UnratedAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
-
-            objTrip.IsActive = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng) == objTrip.Country;
+                objTrip.IsActive = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng) == objTrip.Country;
+            }
 
             return objTrip;
+        }
+
+        public static void UpdateTrip(string id, List<AttractionType> lstAttractionType)
+        {
+            MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(id), 
+                new UpdateDefinitionBuilder<Trip>().Set(x => x.WantedAttractionsTypes, lstAttractionType));
         }
 
     }

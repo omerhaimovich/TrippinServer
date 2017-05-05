@@ -7,9 +7,9 @@ namespace TrippinServer.Models
 {
     public class CreateTripRequest
     {
-        public int Lat { get; set; }
+        public double Lat { get; set; }
 
-        public int Lng { get; set; }
+        public double Lng { get; set; }
 
         public string UserEmail { get; set; }        
     }
