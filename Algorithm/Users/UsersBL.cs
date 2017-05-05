@@ -36,7 +36,8 @@ namespace Algorithm.Users
             else
             {
                 objCurrUser.TripsObjects = MongoAccess.Access<Trip>().Find(objTrip => objTrip.UserEmail == objCurrUser.Email).ToList();
-                objCurrUser.ActiveTrip = objCurrUser.TripsObjects.Where(objTrip => objTrip.Country == GMapsUtilities.GetCountryOfPoint(lat, lng))
+                string UserCountry = GMapsUtilities.GetCountryOfPoint(lat, lng);
+                objCurrUser.ActiveTrip = objCurrUser.TripsObjects.Where(objTrip => objTrip.Country == UserCountry)
                                                                  .OrderByDescending(objTrip => objTrip.CreationDate).FirstOrDefault();
             }
 

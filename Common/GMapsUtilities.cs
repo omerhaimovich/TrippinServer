@@ -28,9 +28,9 @@ namespace Common
             List<Attraction> lstAttractions = new List<Attraction>();
 
             string url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
-            url += pLng;
-            url += ",";
             url += pLat;
+            url += ",";
+            url += pLng;
             url += "&radius=";
             url += pRadius;
             url += "&keyword=";
@@ -104,9 +104,50 @@ namespace Common
         }
 
         // Example: http://maps.googleapis.com/maps/api/geocode/json?latlng=50.602472,9.987603
-        // TODO: Limay
-        public static string GetCountryOfPoint(double lat, double lng)
+        public static string GetCountryOfPoint(double p_lat, double p_lng)
         {
+            string url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
+            url += p_lat;
+            url += ",";
+            url += p_lng;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(url);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // New code:
+                Task<HttpResponseMessage> response = client.GetAsync(client.BaseAddress);
+
+                if (response.Result.IsSuccessStatusCode)
+                {
+
+                    var g = response.Result.Content.ReadAsStringAsync().Result;
+                    var lstResults = JObject.Parse(g).GetValue("results");
+
+                    if(lstResults["results"].Count() == 0 )
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        foreach (var objAddressComponent in lstResults["results"][0]["address_components"])
+                        {
+                            foreach (var strAdressType in objAddressComponent["types"])
+                            {
+                                if(strAdressType.ToString() == "country")
+                                {
+                                    return objAddressComponent["long_name"].ToString();
+                                }
+                            }                            
+                        } 
+                    }
+
+                    return null;                   
+                }
+            }
+
             // Search for country in address_components
             return null;
         }

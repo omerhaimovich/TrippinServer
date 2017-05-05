@@ -21,7 +21,7 @@ namespace TrippinServer.Controllers
         // http://host:port/Users/CreateUser
         public IHttpActionResult CreateUser([FromBody] CreateUserRequest p_objUserCreationRequest)
         {
-            var objUserExist =  MongoAccess.Access<User>().FindSync<User>(objUser => objUser.Email == p_objUserCreationRequest.Email);
+            var objUserExist =  MongoAccess.Access<User>().FindSync<User>(objUser => objUser.Email == p_objUserCreationRequest.Email.ToLower());
 
             if(objUserExist != null)
             {
@@ -30,7 +30,7 @@ namespace TrippinServer.Controllers
 
             User objNewUSer = new Common.Models.User()
             {
-                Email = p_objUserCreationRequest.Email,
+                Email = p_objUserCreationRequest.Email.ToLower(),
                 Password = p_objUserCreationRequest.Password,                
                 NotificationsOn = true,                
                 Username = p_objUserCreationRequest.Name

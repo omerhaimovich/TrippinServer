@@ -1,0 +1,14 @@
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\Common.dll.config
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\Common.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\Common.pdb
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\MongoDB.Bson.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\MongoDB.Driver.Core.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\MongoDB.Driver.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\Newtonsoft.Json.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\MongoDB.Bson.xml
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\MongoDB.Driver.xml
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\MongoDB.Driver.Core.xml
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\bin\Release\Newtonsoft.Json.xml
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\obj\Release\Common.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Common\obj\Release\Common.pdb
