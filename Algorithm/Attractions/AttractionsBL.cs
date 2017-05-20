@@ -21,7 +21,7 @@ namespace Algorithm.Attractions
             if(objCurrUserTrip != null)
             {
                 var lstAttractions = GMapsUtilities.GetAttractionsAroundPoint(p_dLat, p_dLng, objCurrUserTrip.WantedAttractionsTypes);
-                var dicAttractionsHash = lstAttractions.ToDictionary(x => x.ID);
+                var dicAttractionsHash = lstAttractions.ToDictionary(x => x.Id);
                 var AttractionToCharacterHash = new Dictionary<string, string>();
                 var CharacterToAttractionHash = new Dictionary<string, string>();
 
@@ -38,8 +38,8 @@ namespace Algorithm.Attractions
 
                 foreach (var attraction in lstAttractions.Take(generatedcharacters.Count))
                 {
-                    AttractionToCharacterHash.Add(attraction.ID, generatedcharacters[characterIndex]);
-                    CharacterToAttractionHash.Add(generatedcharacters[characterIndex], attraction.ID);
+                    AttractionToCharacterHash.Add(attraction.Id, generatedcharacters[characterIndex]);
+                    CharacterToAttractionHash.Add(generatedcharacters[characterIndex], attraction.Id);
                     lstItems.Add(generatedcharacters[characterIndex]);
                     characterIndex++;
                 }
@@ -52,9 +52,9 @@ namespace Algorithm.Attractions
 
                     foreach (var strAttractionId in objCurrTrip.GoodAttractionsIds)
                     {
-                        if (AttractionToCharacterHash.ContainsKey(strAttractionId))
+                        if (AttractionToCharacterHash.ContainsKey(strAttractionId.Id))
                         {
-                            strTransaction += AttractionToCharacterHash[strAttractionId];
+                            strTransaction += AttractionToCharacterHash[strAttractionId.Id];
                         }
                     }
 
@@ -78,9 +78,9 @@ namespace Algorithm.Attractions
 
                 if (orderedRules.Count() == 0)
                 {
-                    return lstAttractions.Where(objAttraction => objAttraction.IsOpenNow && !objCurrUserTrip.UnratedAttractionsIds.Contains(objAttraction.ID) &&
-                                                                                !objCurrUserTrip.GoodAttractionsIds.Contains(objAttraction.ID) &&
-                                                                                !objCurrUserTrip.BadAttractionsIds.Contains(objAttraction.ID)).OrderByDescending(x => x.Rating).Take(10).ToList();
+                    return lstAttractions.Where(objAttraction => objAttraction.IsOpenNow && !objCurrUserTrip.UnratedAttractionsIds.Select(x => x.Id).Contains(objAttraction.Id) &&
+                                                                                !objCurrUserTrip.GoodAttractionsIds.Select(x=>x.Id).Contains(objAttraction.Id) &&
+                                                                                !objCurrUserTrip.BadAttractionsIds.Select(x => x.Id).Contains(objAttraction.Id)).OrderByDescending(x => x.Rating).Take(10).ToList();
                 }
                 else
                 {
@@ -90,9 +90,9 @@ namespace Algorithm.Attractions
                     {
                         foreach (char proposedAttraction in objRule.Y)
                         {
-                            if (!objCurrUserTrip.BadAttractionsIds.Contains(CharacterToAttractionHash[proposedAttraction.ToString()]) &&
-                                !objCurrUserTrip.GoodAttractionsIds.Contains(CharacterToAttractionHash[proposedAttraction.ToString()]) &&
-                                !objCurrUserTrip.UnratedAttractionsIds.Contains(CharacterToAttractionHash[proposedAttraction.ToString()]))
+                            if (!objCurrUserTrip.BadAttractionsIds.Select(x=>x.Id).Contains(CharacterToAttractionHash[proposedAttraction.ToString()]) &&
+                                !objCurrUserTrip.GoodAttractionsIds.Select(x => x.Id).Contains(CharacterToAttractionHash[proposedAttraction.ToString()]) &&
+                                !objCurrUserTrip.UnratedAttractionsIds.Select(x => x.Id).Contains(CharacterToAttractionHash[proposedAttraction.ToString()]))
                             {
                                 Attraction objAttraction = dicAttractionsHash[CharacterToAttractionHash[proposedAttraction.ToString()]];
                                 if (objAttraction.IsOpenNow && !lstProposedAttractions.Contains(objAttraction))
@@ -160,10 +160,10 @@ namespace Algorithm.Attractions
         {
             Trip objCurrTrip = MongoAccess.Access<Trip>().FindSync(x => x.Id == new ObjectId(p_strTripId)).FirstOrDefault();
 
-            if (objCurrTrip != null && !objCurrTrip.UnratedAttractionsIds.Contains(p_strAttractionId))
+            if (objCurrTrip != null && !objCurrTrip.UnratedAttractionsIds.Select(x => x.Id).Contains(p_strAttractionId))
             {
                 MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
-                    new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.UnratedAttractionsIds, p_strAttractionId));
+                    new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.UnratedAttractionsIds.Select(objAtt => objAtt.Id), p_strAttractionId));
             }
 
         }
@@ -171,7 +171,7 @@ namespace Algorithm.Attractions
         public static void AttractionRated(string p_strTripId, string p_strAttractionId, bool goodAttraction)
         {
             MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
-                new UpdateDefinitionBuilder<Trip>().Pull(x => x.UnratedAttractionsIds, p_strAttractionId));
+                new UpdateDefinitionBuilder<Trip>().Pull(x => x.UnratedAttractionsIds.Select(objAtt => objAtt.Id), p_strAttractionId));
 
             Trip objCurrTrip = MongoAccess.Access<Trip>().FindSync(x => x.Id == new ObjectId(p_strTripId)).FirstOrDefault();
 
@@ -179,18 +179,18 @@ namespace Algorithm.Attractions
             {
                 if (goodAttraction)
                 {
-                    if (!objCurrTrip.GoodAttractionsIds.Contains(p_strAttractionId))
+                    if (!objCurrTrip.GoodAttractionsIds.Select(objAtt => objAtt.Id).Contains(p_strAttractionId))
                     {
                         MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
-                        new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.GoodAttractionsIds, p_strAttractionId));
+                        new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.GoodAttractionsIds.Select(objAtt => objAtt.Id), p_strAttractionId));
                     }
                 }
                 else
                 {
-                    if (!objCurrTrip.BadAttractionsIds.Contains(p_strAttractionId))
+                    if (!objCurrTrip.BadAttractionsIds.Select(objAtt => objAtt.Id).Contains(p_strAttractionId))
                     {
                         MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
-                        new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.BadAttractionsIds, p_strAttractionId));
+                        new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.BadAttractionsIds.Select(objAtt => objAtt.Id), p_strAttractionId));
                     }
                 }
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Common.Enums;
 
 namespace TrippinServer.Models
 {
@@ -11,6 +12,8 @@ namespace TrippinServer.Models
 
         public double Lng { get; set; }
 
-        public string UserEmail { get; set; }        
+        public string UserEmail { get; set; }
+
+        public List<AttractionType> AttractionTypes { get; set; }
     }
 }

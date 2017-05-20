@@ -59,6 +59,7 @@
     <Compile Include="GMapsUtilities.cs" />
     <Compile Include="Interfaces\ICollectional.cs" />
     <Compile Include="Models\Attraction.cs" />
+    <Compile Include="Models\CoreAttraction.cs" />
     <Compile Include="Models\Trip.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="MongoAccess.cs" />

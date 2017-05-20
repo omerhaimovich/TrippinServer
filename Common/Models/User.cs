@@ -13,18 +13,15 @@ namespace Common.Models
     public class User : ICollectional
     {
                 
-        [BsonElement("username")]
-        public string Username { get; set; }
-
         [BsonId]
         [BsonElement("Email")]
         public string Email { get; set; }
 
-        [BsonElement("password")]
-        public string Password { get; set; }
-       
         [BsonElement("notificationsOn")]
         public bool NotificationsOn { get; set; }
+
+        [BsonElement("radius")]
+        public int Radius { get; set; }
 
         [BsonIgnore]
         public List<Trip> TripsObjects { get; set; }

@@ -40,6 +40,7 @@ namespace TrippinServer.Controllers
             // Returns Trip
             return Ok();
         }
+        
 
     }
 }

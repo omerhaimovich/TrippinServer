@@ -22,6 +22,9 @@ namespace Common.Models
         [BsonElement("creationDate")]
         public DateTime CreationDate { get; set; }
 
+        [BsonElement("endDate")]
+        public DateTime EndDate { get; set; }
+
         [BsonElement("year")]
         public int Year { get; set; }
 
@@ -29,13 +32,13 @@ namespace Common.Models
         public string UserEmail { get; set; }
 
         [BsonElement("goodAttractions")]
-        public List<string> GoodAttractionsIds { get; set; }
+        public List<CoreAttraction> GoodAttractionsIds { get; set; }
 
         [BsonElement("badAttractions")]
-        public List<string> BadAttractionsIds { get; set; }
+        public List<CoreAttraction> BadAttractionsIds { get; set; }
 
         [BsonElement("unratedAttractions")]
-        public List<string> UnratedAttractionsIds { get; set; }
+        public List<CoreAttraction> UnratedAttractionsIds { get; set; }
 
         [BsonElement("wantedAttractions")]
         public List<AttractionType> WantedAttractionsTypes { get; set; }

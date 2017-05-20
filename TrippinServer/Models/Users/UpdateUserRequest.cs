@@ -9,6 +9,8 @@ namespace TrippinServer.Models.Users
     {
         public string Email { get; set; }
 
+        public int Radius { get; set; }
+
         public bool NotificationsOn { get; set; }
     }
 }

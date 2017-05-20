@@ -22,7 +22,7 @@ namespace TrippinServer.Controllers
         public IHttpActionResult CreateTrip([FromBody] CreateTripRequest p_objTripCreationRequest)
         {
             // Returns Trip
-            return Ok(TripsBL.CreateTrip(p_objTripCreationRequest.UserEmail, p_objTripCreationRequest.Lat, p_objTripCreationRequest.Lng));
+            return Ok(TripsBL.CreateTrip(p_objTripCreationRequest.UserEmail, p_objTripCreationRequest.Lat, p_objTripCreationRequest.Lng, p_objTripCreationRequest.AttractionTypes));
         }
 
         [HttpGet]

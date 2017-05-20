@@ -44,10 +44,10 @@ namespace Algorithm.Users
             return objCurrUser;
         }
 
-        public static void UpdateUser(string strEmail, bool p_NotificationsOn)
+        public static void UpdateUser(string strEmail, bool p_NotificationsOn, int p_radius)
         {
             MongoAccess.Access<User>().FindOneAndUpdate(objUser => objUser.Email == strEmail, 
-                new UpdateDefinitionBuilder<User>().Set(x => x.NotificationsOn, p_NotificationsOn));
+                new UpdateDefinitionBuilder<User>().Set(x => x.NotificationsOn, p_NotificationsOn).Set(x=>x.Radius, p_radius));
         }
 
     }

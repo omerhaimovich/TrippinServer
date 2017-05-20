@@ -17,50 +17,7 @@ namespace TrippinServer.Controllers
     [RoutePrefix("api/users")]
     public class UsersController : ApiController
     {
-        [HttpPost]
-        [Route("CreateUser")]
-        // http://host:port/Users/CreateUser
-        public IHttpActionResult CreateUser([FromBody] CreateUserRequest p_objUserCreationRequest)
-        {
-            var objUserExist =  MongoAccess.Access<User>().FindSync<User>(objUser => objUser.Email == p_objUserCreationRequest.Email.ToLower());
-
-            if(objUserExist != null)
-            {
-                return BadRequest("User Already Exists");
-            }
-
-            User objNewUSer = new Common.Models.User()
-            {
-                Email = p_objUserCreationRequest.Email.ToLower(),
-                Password = p_objUserCreationRequest.Password,                
-                NotificationsOn = true,                
-                Username = p_objUserCreationRequest.Name
-            };
-
-            MongoAccess.Access<User>().InsertOne(objNewUSer);
-
-            // Returns User
-            return Ok(objNewUSer);
-        }
-
-        [HttpPost]
-        [Route("AuthenticateUser")]
-        // http://host:port/Users/AuthenticateUser
-        public IHttpActionResult AuthenticateUser([FromBody] AuthUserRequest p_objUserAuthRequest)
-        {
-            User objUserExist = MongoAccess.Access<User>().FindSync<User>(objUser => objUser.Email == p_objUserAuthRequest.Email &&
-            objUser.Password == p_objUserAuthRequest.Password).FirstOrDefault();
-
-            if (objUserExist == null)
-            {
-                return BadRequest("User does not exist");
-            }
-
-            objUserExist.Password = "";
-            // Returns User
-            return Ok(objUserExist);
-        }
-
+        
         
         [HttpPost]
         [Route("ConnectUser")]
@@ -77,7 +34,7 @@ namespace TrippinServer.Controllers
         public IHttpActionResult UpdateUser([FromBody] UpdateUserRequest p_objUserUpdateRequest)
         {
 
-            UsersBL.UpdateUser(p_objUserUpdateRequest.Email.ToLower(), p_objUserUpdateRequest.NotificationsOn);                        
+            UsersBL.UpdateUser(p_objUserUpdateRequest.Email.ToLower(), p_objUserUpdateRequest.NotificationsOn, p_objUserUpdateRequest.Radius);                        
             return Ok();
         }
 

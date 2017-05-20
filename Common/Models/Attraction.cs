@@ -4,9 +4,8 @@ using Common.Interfaces;
 namespace Common.Models
 {
 
-    public class Attraction : ICollectional
+    public class Attraction : CoreAttraction, ICollectional
     {
-        public string ID { get; set; }
         public bool IsOpenNow { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }

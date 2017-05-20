@@ -98,7 +98,7 @@ namespace Common
 
                             Attraction objAttraction = new Attraction()
                             {
-                                ID = id,
+                                Id = id,
                                 IsOpenNow = open,
                                 Latitude = lat,
                                 Longitude = lng,
@@ -234,7 +234,7 @@ namespace Common
 
                         objAttraction = new Attraction()
                         {
-                            ID = id,
+                            Id = id,
                             IsOpenNow = open,
                             Latitude = lat,
                             Longitude = lng,

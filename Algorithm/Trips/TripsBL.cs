@@ -13,7 +13,7 @@ namespace Algorithm.Trips
 {
     public class TripsBL
     {
-        public static Trip CreateTrip(string p_strEmail, double p_dLat, double p_dLng)
+        public static Trip CreateTrip(string p_strEmail, double p_dLat, double p_dLng, List<AttractionType> AttractionTypes)
         {
             User objUser = MongoAccess.Access<User>().FindSync(objCurrUser => objCurrUser.Email == p_strEmail).FirstOrDefault();
 
@@ -24,15 +24,15 @@ namespace Algorithm.Trips
             {
                 UserEmail = p_strEmail,
                 Year = DateTime.Now.Year,
-                UnratedAttractionsIds = new List<string>(),
+                UnratedAttractionsIds = new List<CoreAttraction>(),
                 BadAttractions = new List<Attraction>(),
-                BadAttractionsIds = new List<string>(),
+                BadAttractionsIds = new List<CoreAttraction>(),
                 Country = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng),
                 CreationDate = DateTime.Now,
-                WantedAttractionsTypes = new List<AttractionType>(Enum.GetValues(typeof(AttractionType)).Cast<AttractionType>()),
+                WantedAttractionsTypes = AttractionTypes,
                 IsActive = true,
                 GoodAttractions = new List<Attraction>(),
-                GoodAttractionsIds = new List<string>(),
+                GoodAttractionsIds = new List<CoreAttraction>(),
                 UnratedAttractions = new List<Attraction>(),
             };
             
@@ -54,13 +54,13 @@ namespace Algorithm.Trips
                 objTrip.UnratedAttractions = new List<Attraction>();
                 
                 foreach (var attractionId in objTrip.GoodAttractionsIds)
-                    objTrip.GoodAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
+                    objTrip.GoodAttractions.Add(GMapsUtilities.GetAttractionById(attractionId.Id));
 
                 foreach (var attractionId in objTrip.BadAttractionsIds)
-                    objTrip.BadAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
+                    objTrip.BadAttractions.Add(GMapsUtilities.GetAttractionById(attractionId.Id));
 
                 foreach (var attractionId in objTrip.UnratedAttractionsIds)
-                    objTrip.UnratedAttractions.Add(GMapsUtilities.GetAttractionById(attractionId));
+                    objTrip.UnratedAttractions.Add(GMapsUtilities.GetAttractionById(attractionId.Id));
 
                 objTrip.IsActive = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng) == objTrip.Country;
             }
