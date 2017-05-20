@@ -105,6 +105,8 @@
     </Compile>
     <Compile Include="Models\Attractions\AttractionChosenRequest.cs" />
     <Compile Include="Models\Attractions\AttractionRatedRequest.cs" />
+    <Compile Include="Models\Attractions\EndAttractionRequest.cs" />
+    <Compile Include="Models\Trips\EndTripRequest.cs" />
     <Compile Include="Models\Trips\UpdateTripRequest.cs" />
     <Compile Include="Models\Users\AuthUserRequest.cs" />
     <Compile Include="Models\Users\ConnectUserRequest.cs" />

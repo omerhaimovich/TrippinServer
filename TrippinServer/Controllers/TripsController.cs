@@ -41,6 +41,15 @@ namespace TrippinServer.Controllers
             // Returns Trip
             return Ok();
         }
+        [HttpPost]
+        [Route("EndTrip")]
+        // http://host:port/Users/GetTrip
+        public IHttpActionResult EndTrip([FromBody] UpdateTripRequest p_objTripUpdateRequest)
+        {
+            TripsBL.EndTrip(p_objTripUpdateRequest.TripId);
+            // Returns Trip
+            return Ok();
+        }
 
 
     }

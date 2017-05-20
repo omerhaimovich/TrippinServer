@@ -40,7 +40,16 @@ namespace TrippinServer.Controllers
             // Returns Trip
             return Ok();
         }
-        
 
+
+        [HttpPost]
+        [Route("AttractionEnd")]
+        // http://host:port/Users/GetTrip
+        public IHttpActionResult AttractionEnd([FromBody] EndAttractionRequest objattRated)
+        {
+            AttractionsBL.AttractionEnd(objattRated.TripId, objattRated.AttractionId);
+            // Returns Trip
+            return Ok();
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace Algorithm.Trips
                 WantedAttractionsTypes = AttractionTypes,
                 IsActive = true,
                 GoodAttractions = new List<Attraction>(),
-                GoodAttractionsIds = new List<CoreAttraction>(),
+                GoodAttractionsIds = new List<CoreAttraction>(), 
                 UnratedAttractions = new List<Attraction>(),
             };
             
@@ -74,5 +74,10 @@ namespace Algorithm.Trips
                 new UpdateDefinitionBuilder<Trip>().Set(x => x.WantedAttractionsTypes, lstAttractionType));
         }
 
+        public static void EndTrip(string id)
+        {
+            MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(id),
+                new UpdateDefinitionBuilder<Trip>().Set(x => x.EndDate, DateTime.Now));
+        }
     }
 }
