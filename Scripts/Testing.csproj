@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Algorithm\BussinessLogic.csproj">
+      <Project>{21DBA8B2-2F43-4C2A-B3CF-8758E0B23F3F}</Project>
+      <Name>BussinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{34755d36-1332-41ba-b64f-8d3f985c73bd}</Project>
       <Name>Common</Name>

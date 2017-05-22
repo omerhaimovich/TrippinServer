@@ -167,7 +167,8 @@ namespace Algorithm.Attractions
                     new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.UnratedAttractionsIds, new CoreAttraction()
                     {
                         Id = p_strAttractionId,
-                        StartDate = DateTime.Now
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.MinValue
                     }));
             }
 
@@ -177,25 +178,25 @@ namespace Algorithm.Attractions
         {
 
             Trip objTrip = MongoAccess.Access<Trip>().FindSync(objCurrTrip => objCurrTrip.Id == new ObjectId(p_strTripId)).First();
-            if (objTrip.UnratedAttractionsIds.Where(x => x.Id == p_strAttractionId).FirstOrDefault() != null)
-                objTrip.UnratedAttractionsIds.Where(x => x.Id == p_strAttractionId).FirstOrDefault().EndDate = DateTime.Now;
+            CoreAttraction att;
+            if (( att= objTrip.UnratedAttractionsIds.Where(x => x.Id == p_strAttractionId).FirstOrDefault()) != null)
+                att.EndDate = DateTime.Now;
+            objTrip = null;
+            MongoAccess.Access<Trip>().FindOneAndUpdate(objCurrTrip => objCurrTrip.Id == new ObjectId(p_strTripId),
+                new UpdateDefinitionBuilder<Trip>().PullFilter<CoreAttraction>(x => x.UnratedAttractionsIds, x=>x.Id == p_strAttractionId));
 
-            MongoAccess.Access<Trip>().FindOneAndUpdate(objCurrTrip => objTrip.Id == new ObjectId(p_strTripId),
-                new UpdateDefinitionBuilder<Trip>().Set(x => x.UnratedAttractionsIds, objTrip.UnratedAttractionsIds));
+            MongoAccess.Access<Trip>().FindOneAndUpdate(objCurrTrip => objCurrTrip.Id == new ObjectId(p_strTripId),
+                new UpdateDefinitionBuilder<Trip>().AddToSet(x => x.UnratedAttractionsIds, att));
         }
 
         public static void AttractionRated(string p_strTripId, string p_strAttractionId, bool goodAttraction)
         {
             Trip objCurrTrip = MongoAccess.Access<Trip>().FindSync(x => x.Id == new ObjectId(p_strTripId)).FirstOrDefault();
             CoreAttraction coreAtt = objCurrTrip.UnratedAttractionsIds.Where(x => x.Id == p_strAttractionId).FirstOrDefault();
-            objCurrTrip.UnratedAttractionsIds.Remove(coreAtt);
-
-
 
 
             MongoAccess.Access<Trip>().FindOneAndUpdate(objTrip => objTrip.Id == new ObjectId(p_strTripId),
-                new UpdateDefinitionBuilder<Trip>().Set(x => x.UnratedAttractionsIds, objCurrTrip.UnratedAttractionsIds));
-
+               new UpdateDefinitionBuilder<Trip>().PullFilter<CoreAttraction>(x => x.UnratedAttractionsIds, x => x.Id == p_strAttractionId));
 
 
             if (objCurrTrip != null)

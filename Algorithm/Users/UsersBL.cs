@@ -29,6 +29,7 @@ namespace Algorithm.Users
                     NotificationsOn = true,                    
                     ActiveTrip = null,
                     TripsObjects = new List<Trip>(),
+                    Radius = 20
                 };
 
                 MongoAccess.Access<User>().InsertOne(objCurrUser);

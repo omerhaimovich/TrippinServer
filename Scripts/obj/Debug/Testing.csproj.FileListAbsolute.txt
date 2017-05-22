@@ -15,3 +15,7 @@ C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\MongoDB
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\obj\Debug\Testing.csprojResolveAssemblyReference.cache
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\obj\Debug\Scripts.exe
 C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\obj\Debug\Scripts.pdb
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\Algorithm.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\AprioriAlgorithm.dll
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\Algorithm.pdb
+C:\Users\Omer Haimovich\Documents\GitHub\TrippinServer\Scripts\bin\Debug\AprioriAlgorithm.pdb
