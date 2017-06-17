@@ -11,13 +11,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Algorithm.dll">
-      <publishTime>05/22/2017 22:19:37</publishTime>
+      <publishTime>06/08/2017 00:12:39</publishTime>
     </File>
     <File Include="bin/AprioriAlgorithm.dll">
       <publishTime>05/05/2017 12:10:07</publishTime>
     </File>
     <File Include="bin/Common.dll">
-      <publishTime>05/20/2017 15:50:51</publishTime>
+      <publishTime>06/08/2017 00:12:38</publishTime>
     </File>
     <File Include="bin/Common.dll.config">
       <publishTime>04/30/2017 16:37:38</publishTime>
@@ -128,7 +128,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 13:03:46</publishTime>
     </File>
     <File Include="bin/TrippinServer.dll">
-      <publishTime>05/22/2017 22:19:42</publishTime>
+      <publishTime>06/08/2017 00:12:42</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>04/27/2017 21:16:08</publishTime>

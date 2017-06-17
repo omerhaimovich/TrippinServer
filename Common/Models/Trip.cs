@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Common.Models
 {
+    [BsonIgnoreExtraElements]
     public class Trip : ICollectional
     {
         [BsonId]
@@ -32,25 +33,19 @@ namespace Common.Models
         public string UserEmail { get; set; }
 
         [BsonElement("goodAttractions")]
-        public List<CoreAttraction> GoodAttractionsIds { get; set; }
+        public List<CoreAttraction> GoodAttractions { get; set; }
 
         [BsonElement("badAttractions")]
-        public List<CoreAttraction> BadAttractionsIds { get; set; }
+        public List<CoreAttraction> BadAttractions { get; set; }
 
         [BsonElement("unratedAttractions")]
-        public List<CoreAttraction> UnratedAttractionsIds { get; set; }
+        public List<CoreAttraction> UnratedAttractions { get; set; }
+
+        [BsonElement("allAttractions")]
+        public List<CoreAttraction> AllAttractions { get; set; }
 
         [BsonElement("wantedAttractions")]
-        public List<AttractionType> WantedAttractionsTypes { get; set; }
-
-        [BsonIgnore]
-        public List<Attraction> GoodAttractions { get; set; }
-
-        [BsonIgnore]
-        public List<Attraction> BadAttractions { get; set; }
-
-        [BsonIgnore]
-        public List<Attraction> UnratedAttractions { get; set; }
+        public List<AttractionType> WantedAttractionsTypes { get; set; }  
 
         [BsonIgnore]
         public bool IsActive { get; set; }

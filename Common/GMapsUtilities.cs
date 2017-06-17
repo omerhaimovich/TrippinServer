@@ -40,7 +40,10 @@ namespace Common
         /// Example: https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.903639,12.483153&radius=10000&keyword=restaurant&key=AIzaSyBoB1pwTp2TzJbiHdkfl8loYsbTGYL_w60
         public static List<Attraction> GetAttractionsAroundPoint(double pLat, double pLng, List<AttractionType> attractionTypes, double pRadius = 20000)
         {
-            
+
+            if (attractionTypes.Count == 0)
+                attractionTypes.Add(AttractionType.Landmark);
+
             ConcurrentBag<Attraction> lstAttractions = new ConcurrentBag<Attraction>();
 
             int MaximumAttractions = 30;
@@ -54,7 +57,7 @@ namespace Common
                 url += ",";
                 url += pLng;
                 url += "&radius=";
-                url += pRadius;
+                url += pRadius * 1000;
                 url += "&keyword=";
                 url += TypesToSearchString[attType];
                 url += "%20";
@@ -163,7 +166,7 @@ namespace Common
 
                     if(lstResults.Count() == 0 )
                     {
-                        return null;
+                        return "Unknown";
                     }
                     else
                     {
@@ -179,20 +182,20 @@ namespace Common
                         } 
                     }
 
-                    return null;                   
+                    return "Unknown";
                 }
             }
 
             // Search for country in address_components
-            return null;
+            return "Unknown";
         }
 
         // TODO: Limay
         // Example: https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&key=AIzaSyBoB1pwTp2TzJbiHdkfl8loYsbTGYL_w60
-        public static Attraction GetAttractionById(string PlaceId)
+        public static Attraction GetAttractionByCore(CoreAttraction Attraction)
         {
             string url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=";
-            url += PlaceId;          
+            url += Attraction.Id;          
             url += "&key=";
             url += ConfigurationSettings.AppSettings["GoogleKey"];
 
@@ -240,7 +243,9 @@ namespace Common
                             Longitude = lng,
                             Name = name,
                             Rating = (float)rating,
-                            PhotoUrl = GetPhotoURLOfAttraction(photoReference)
+                            PhotoUrl = GetPhotoURLOfAttraction(photoReference),
+                            EndDate = Attraction.EndDate,
+                            StartDate = Attraction.StartDate                            
                         };
                     }
                 }

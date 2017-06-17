@@ -35,6 +35,7 @@
     <Reference Include="MongoDB.Driver, Version=2.4.3.23, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{34755d36-1332-41ba-b64f-8d3f985c73bd}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrippinServer\TrippinServer.csproj">
+      <Project>{9842868C-EABD-49E1-AF5E-BBAB11FC920B}</Project>
+      <Name>TrippinServer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

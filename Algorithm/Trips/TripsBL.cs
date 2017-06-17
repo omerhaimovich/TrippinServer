@@ -24,16 +24,13 @@ namespace Algorithm.Trips
             {
                 UserEmail = p_strEmail,
                 Year = DateTime.Now.Year,
-                UnratedAttractionsIds = new List<CoreAttraction>(),
-                BadAttractions = new List<Attraction>(),
-                BadAttractionsIds = new List<CoreAttraction>(),
+                UnratedAttractions = new List<CoreAttraction>(),                
+                BadAttractions = new List<CoreAttraction>(),
                 Country = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng),
                 CreationDate = DateTime.Now,
                 WantedAttractionsTypes = AttractionTypes,
-                IsActive = true,
-                GoodAttractions = new List<Attraction>(),
-                GoodAttractionsIds = new List<CoreAttraction>(), 
-                UnratedAttractions = new List<Attraction>(),
+                IsActive = true,                
+                GoodAttractions = new List<CoreAttraction>(),                 
             };
             
             MongoAccess.Access<Trip>().InsertOne(objTrip);
@@ -41,31 +38,54 @@ namespace Algorithm.Trips
             return objTrip;
         }
 
-        public static Trip GetTrip(string id, string p_strEmail, double p_dLat, double p_dLng)
+        public static ExtendedTrip GetTrip(string id, string p_strEmail, double p_dLat, double p_dLng)
         {
             Trip objTrip = MongoAccess.Access<Trip>().FindSync(objCurrTrip => objCurrTrip.Id == new MongoDB.Bson.ObjectId(id)).FirstOrDefault();
-
+           
             string Country = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng);
 
             if (objTrip != null)
             {
-                objTrip.GoodAttractions = new List<Attraction>();
-                objTrip.BadAttractions = new List<Attraction>();
-                objTrip.UnratedAttractions = new List<Attraction>();
-                
-                foreach (var attractionId in objTrip.GoodAttractionsIds)
-                    objTrip.GoodAttractions.Add(GMapsUtilities.GetAttractionById(attractionId.Id));
+                ExtendedTrip objFullTrip = new ExtendedTrip(objTrip);
 
-                foreach (var attractionId in objTrip.BadAttractionsIds)
-                    objTrip.BadAttractions.Add(GMapsUtilities.GetAttractionById(attractionId.Id));
+                var GoodAttractions = new List<Attraction>();
+                var BadAttractions = new List<Attraction>();
+                var UnratedAttractions = new List<Attraction>();
+                var AllAttractions = new List<Attraction>();
+                foreach (var attractionId in objTrip.GoodAttractions.Where(x => x != null))
+                {
+                    if (attractionId != null)
+                    {
+                        Attraction att = GMapsUtilities.GetAttractionByCore(attractionId);
+                        GoodAttractions.Add(att);
+                        AllAttractions.Add(att);
+                    }
+                }
 
-                foreach (var attractionId in objTrip.UnratedAttractionsIds)
-                    objTrip.UnratedAttractions.Add(GMapsUtilities.GetAttractionById(attractionId.Id));
+                foreach (var attractionId in objTrip.BadAttractions.Where(x => x != null))
+                {
+                    Attraction att = GMapsUtilities.GetAttractionByCore(attractionId);
+                    BadAttractions.Add(att);
+                    AllAttractions.Add(att);
+                }
 
-                objTrip.IsActive = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng) == objTrip.Country;
+                foreach (var attractionId in objTrip.UnratedAttractions.Where(x => x != null))
+                {
+                    Attraction att = GMapsUtilities.GetAttractionByCore(attractionId);
+                    UnratedAttractions.Add(att);
+                    AllAttractions.Add(att);
+                }
+
+                objFullTrip.IsActive = GMapsUtilities.GetCountryOfPoint(p_dLat, p_dLng) == objTrip.Country;
+                objFullTrip.FullGoodAttractions= GoodAttractions;
+                objFullTrip.FullBadAttractions = BadAttractions;
+                objFullTrip.FullUnratedAttractions  = UnratedAttractions;
+                objFullTrip.FullAllAttractions = AllAttractions;
+
+                return objFullTrip;
             }
 
-            return objTrip;
+            return null;
         }
 
         public static void UpdateTrip(string id, List<AttractionType> lstAttractionType)
